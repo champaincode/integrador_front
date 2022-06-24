@@ -17,8 +17,7 @@ import Shopcar from "../Utils/Shopcar";
 import Search from "./Search"
 
 const pages = [
-  { productName: "Products", routes: "/products" },
-  { productName: "coffee", routes: "/coffee" },
+  { productName: "Menu", routes: "/menu" },
   { productName: "location", routes: "/location" },
   { productName: "featured", routes: "/featured" },
   
