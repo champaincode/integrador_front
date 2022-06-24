@@ -18,11 +18,10 @@ import Search from "./Search"
 
 const pages = [
   { productName: "Menu", routes: "/menu" },
-  { productName: "location", routes: "/location" },
-  { productName: "featured", routes: "/featured" },
+  { productName: "Location", routes: "/location" },
+  { productName: "Featured", routes: "/featured" },
   
 ];
-
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
