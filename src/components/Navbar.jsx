@@ -25,7 +25,6 @@ import { setLogout } from "../store/user";
 import { setPersistencia } from "../store/user";
 import { useSelector } from "react-redux";
 import { Divider } from "@mui/material";
-import TemporaryDrawer from "./Login/AdminDashboard/Sidebar"
 import axios from "axios";
 
 const Navbar = () => {
@@ -51,14 +50,7 @@ const Navbar = () => {
       routes: "/location",
       icons: <RoomIcon sx={{ ml: "2px" }} />,
     },
-   
-  
-
-  ];
-
-
-
-
+   ]
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -235,17 +227,14 @@ const Navbar = () => {
              bookings<CalendarTodayIcon sx={{ ml: "2px" }} />
                 </Button>
               </Link>}
-        
-
-
             {user.isAdmin && <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
-            sx={{color:"green"}}
-            >Dashboard</Button> }  
+            sx={{color:"#03fc35"}}
+            >Admin</Button> }  
                <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -255,10 +244,8 @@ const Navbar = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-       <Link to="/admin/users"><MenuItem onClick={handleClose}>Users</MenuItem></Link> 
-       <Link to="/admin/products"><MenuItem onClick={handleClose}>Products</MenuItem></Link> 
- 
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+       <Link to="/admin/users" className="link-admin-menu"><MenuItem onClick={handleClose}>Users</MenuItem></Link> 
+       <Link to="/admin/products"className="link-admin-menu"><MenuItem onClick={handleClose}>Products</MenuItem></Link> 
       </Menu>
           </Box>
           
@@ -328,14 +315,7 @@ const Navbar = () => {
                   </MenuItem>
 
                   <MenuItem onClick={handleCloseUserMenu}>
-                
-                      {user.isAdmin && (
-                        <Typography textAlign="center" sx={{ color: "green" }}>
-                          Admin
-                        </Typography>
-                      )}
-                 
-                  </MenuItem>
+              </MenuItem>
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Link
                       to="/login"

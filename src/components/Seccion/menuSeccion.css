@@ -8,3 +8,10 @@
 body { margin: 0; padding: 0; }
 #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 
+.change{
+    color:rgb(156, 156, 157);
+}
+
+.change2{
+    color:red;
+}

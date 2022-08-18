@@ -85,7 +85,7 @@ const onSubmit = (data,e) => {
             fullWidth
           />
              {errors.password && <p className="p_color_error" >*Password Require*</p>}
-          <hr />
+          <br />
         </Grid>
         <Box sx={{display:"flex", justifyContent:"center"}}> 
         <Button className="Button_Login_Register"

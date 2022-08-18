@@ -1,0 +1,25 @@
+
+.featured_pc{
+display: flex; 
+align-items: center;
+height:100vh; 
+width:100vw; 
+}
+
+
+
+.featured_phone{
+display: flex;
+flex-direction: column-reverse;
+
+}
+
+.imagen_featured_phone{
+  width: 100vw !important;
+}
+
+
+.text_phone_featured{
+    width: 100vw !important;
+    text-align: center;
+  }

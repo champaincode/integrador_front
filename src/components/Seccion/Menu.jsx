@@ -5,12 +5,23 @@ import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./menuSeccion.css";
 import { experimentalStyled as styled } from "@mui/material/styles";
-import { display } from "@mui/system";
-
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useSelector, useDispatch } from "react-redux";
+import { setFoods } from "../../store/foods";
+import { setDrinks  } from "../../store/drinks";
+import { setFoodsId } from "../../store/foodsId"
+import { setDrinkId } from "../../store/drinkId"
+import Modaldrink from "../../Common/Modaldrink"
+import Modalfood from "../../Common/Modalfood";
+import ModalUnic from "../../Common/ModalUnic";
+ 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -35,105 +46,52 @@ const style = {
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [openDos, setOpenDos] = useState(false);
+  const [changecolor, setChangecolor] = useState("change");
+  const handleCloseFood = () => setOpenDos(false);
   const handleClose = () => setOpen(false);
-  return (
+  const handleFavoriteReset = () => setChangecolor("change");
+  const drinkDetail = useSelector((state)=>state.setDrinkId)
+  const foodDetail = useSelector((state)=>state.setFoodsId)
+  const foodsProduct = useSelector((state)=>state.setFoods)
+  const drinksProduct = useSelector((state)=>state.setDrinks)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setDrinks())
+    dispatch(setFoods())
+    }, [])
+
+    const handleOpen = (id) => {
+      dispatch(setDrinkId(id))
+      setOpen(true);
+    };
+  
+    const handleOpenFood = (id) => {
+      dispatch(setFoodsId(id))
+      setOpenDos(true);
+    };
+
+  const HandleFavorite = () => {
+    changecolor === "change"
+      ? setChangecolor("change2")
+      : setChangecolor("change");
+
+    changecolor === "change"
+      ? setTimeout(() => {
+          alert("añadiste a favoritos");
+        }, 500)
+      : setTimeout(() => {
+          alert("quitaste de favoritos");
+        }, 500);
+  };
+
+
+ return (
     <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h2"
-            component="h2"
-            sx={{ fontFamily: "lobster", marginTop: "50px" }}
-          >
-            Cofeels
-          </Typography>
-          <Grid
-            container
-            spacing={{ xs: 8, md: 12 }}
-            columns={{ xs: 4, sm: 8, md: 1 }}
-          >
-            {Array.from(Array(1)).map((_, index) => (
-              <Grid
-                item
-                xs={2}
-                sm={4}
-                md={4}
-                key={index}
-                sx={{ display: "flex", justifyContent: "end" }}
-              >
-                <Box sx={{ display: "flex", flexDirection: "column", flex: 4 }}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h4"
-                    component="h2"
-                    sx={{ fontFamily: "lobster", marginTop: "20px" }}
-                  >
-                    Latte con crema
-                  </Typography>
-
-                  <Typography
-                    id="modal-modal-title"
-                    variant="p"
-                    component="p"
-                    sx={{ fontFamily: "Roboto", marginTop: "20px" }}
-                  >
-                    {" "}
-                    Café espresso con leche vaporizada.
-                  </Typography>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="p"
-                    component="p"
-                    sx={{ fontFamily: "Roboto", marginTop: "20px" }}
-                  >
-                    {" "}
-                    Stock: 5
-                  </Typography>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="p"
-                    component="p"
-                    sx={{ fontFamily: "Roboto", marginTop: "20px" }}
-                  >
-                    {" "}
-                    Price: 20$
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    sx={{ fontFamily: "Roboto", marginTop: "50px" }}
-                  >
-                    Buy
-                  </Button>
-                </Box>
-
-                <Item
-                  sx={{
-                    width: "100px",
-                    borderRadius: "100px",
-                    height: "100px",
-                    backgroundColor: "#795548",
-                    padding: { xs: 2, md: 2 },
-                  }}
-                >
-                  <img
-                    className="img_adptable"
-                    src="https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FSkinny%20Vainilla%20Latte%20425x425%20sin%20fondo.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop"
-                  />
-                </Item>
-              </Grid>
-            ))}
-          </Grid>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
-        </Box>
-      </Modal>
+      <ModalUnic/>
+      <Modaldrink drinkDetail={drinkDetail} open={open} handleClose={handleClose} HandleFavorite={HandleFavorite}  changecolor={ changecolor} />
+      <Modalfood foodDetail={foodDetail} openDos={openDos} handleCloseFood={handleCloseFood} HandleFavorite={HandleFavorite}  changecolor={ changecolor} />
 
       <Container sx={{ marginTop: "100px" }}>
         <Container>
@@ -158,23 +116,19 @@ const Menu = () => {
               spacing={{ xs: 8, md: 5 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              {Array.from(Array(8)).map((_, index) => (
+              {drinksProduct.map((drink, index) => (
                 <Grid item xs={2} sm={4} md={2} key={index}>
-                  <Button onClick={handleOpen}>
+                  <Button onClick={() => handleOpen(drink.id)}>
                     <Item
                       sx={{
                         width: "90px",
                         borderRadius: "100px",
                         height: "90px",
                         backgroundColor: "#795548",
-                      
-                        "&:hover": { border: "8px solid #FFCC96" },
+                        "&:hover": { backgroundColor: "#FFCC96" },
                       }}
                     >
-                      <img
-                        className="img_adptable"
-                        src="https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FSkinny%20Vainilla%20Latte%20425x425%20sin%20fondo.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop"
-                      />
+                      <img className="img_adptable" src={drink.image} />
                     </Item>
                   </Button>
 
@@ -184,7 +138,7 @@ const Menu = () => {
                     component="h2"
                     sx={{ fontFamily: "lobster", marginLeft: "15px" }}
                   >
-                    Café con leche
+                    {drink.tittle}
                   </Typography>
                 </Grid>
               ))}
@@ -215,26 +169,23 @@ const Menu = () => {
               spacing={{ xs: 8, md: 5 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              {Array.from(Array(8)).map((_, index) => (
+              {foodsProduct.map((food, index) => (
                 <Grid item xs={2} sm={4} md={2} key={index}>
-                  <Button onClick={handleOpen}>
-                  <Item
-                    sx={{
-                      width: "100px",
-                      borderRadius: "100px",
-                      height: "100px",
-                      backgroundColor: "#795548",
-                      padding: { xs: 2, md: 2 },
-                      "&:hover": { border: "8px solid #FFCC96" },
-                    }}
-                  >
-                    <img
-                      className="img_adptable"
-                      src="https://djftrby1k8irl.cloudfront.net/s3fs-public/2022-03%2FMezzaluna-425-x-425_0.png?auto=format,compress&q=70&crop=focalpoint&ar=1:1.0&w=180&fit=crop"
-                    />
-                  </Item>
+                  <Button onClick={() => handleOpenFood(food.id)}>
+                    <Item
+                      sx={{
+                        width: "100px",
+                        borderRadius: "100px",
+                        height: "100px",
+                        backgroundColor: "#795548",
+                        padding: { xs: 2, md: 2 },
+                        "&:hover": { backgroundColor: "#FFCC96" },
+                      }}
+                    >
+                      <img className="img_adptable" src={food.image} />
+                    </Item>
                   </Button>
-                  <h2 style={{ marginLeft: "10px" }}> Media luna </h2>
+                  <h2 style={{ marginLeft: "10px" }}> {food.tittle} </h2>
                 </Grid>
               ))}
             </Grid>

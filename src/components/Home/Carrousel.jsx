@@ -1,4 +1,5 @@
 import { Carousel } from 'react-carousel-minimal';
+import {Container} from '@mui/material'
 
 function App() {
  const data = [
@@ -33,7 +34,7 @@ function App() {
   }
   return (
    
-      <div style={{ textAlign: "center" ,marginTop:"75px",  }}>
+      <div style={{ textAlign: "center" ,marginTop:"80px",  }}>
       
         
         <div style={{
@@ -42,7 +43,7 @@ function App() {
           <Carousel
             data={data}
             time={5000}
-            width="1600px"
+            width="1500px"
             height="500px"
             captionStyle={captionStyle}
             radius="10px"
@@ -59,7 +60,7 @@ function App() {
             thumbnailWidth="100px"
             style={{
               textAlign: "center",
-              maxWidth: "1600px",
+              maxWidth: "1500px",
               maxHeight: "600px",
               margin: "40px auto",
               

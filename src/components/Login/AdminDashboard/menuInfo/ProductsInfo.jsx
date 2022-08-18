@@ -1,14 +1,14 @@
 import "./menuinfo.css"
 
-const MenuInfo = () => {
+const ProductsInfo = () => {
   return (
     <div className="Menu_container">
       <div className="Menu_Tittle">
-      Users
+      Products
       </div>
     
     </div>
   )
 }
 
-export default MenuInfo
+export default ProductsInfo

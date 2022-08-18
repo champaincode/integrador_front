@@ -1,0 +1,85 @@
+.modal {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .mymodal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+    border: 1px solid #ccc;
+    background: #ffffff;
+
+    border-radius: 4px;
+
+    padding: 20px;
+    height: 70%;
+    width: 300px;
+  }
+  
+  .myoverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+  
+  .ReactModal__Overlay {
+ 
+    transition: opacity 500ms ease-in-out;
+  }
+  
+
+  
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+  
+
+
+.inputx {
+  background-color: #ffffff;
+  max-width: 190px;
+  height: 20px;
+  padding: 10px;
+  /* text-align: center; */
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  /* box-shadow: 3px 3px 2px rgb(249, 255, 85); */
+}
+
+.inputx:focus {
+  color: rgb(0, 1, 1);
+  background-color: #ffffff;
+  outline-color: rgb(179, 146, 146);
+  box-shadow: -3px -3px 15px rgb(179, 146, 146);
+  transition: .1s;
+  transition-property: box-shadow;
+}
+
+.form-inputs{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.input-margen{
+    margin-top: 5px;
+    color: black
+}
+
+.radio-form{
+    display: flex;
+    justify-content: center;
+  
+}
+
+.radio-form-text{
+    text-align: center;
+}

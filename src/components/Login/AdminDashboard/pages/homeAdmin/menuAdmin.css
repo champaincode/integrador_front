@@ -1,55 +1,89 @@
-.menu{
-    flex:4;
-   margin-top: 100px;
+.menu_content{
+  margin-bottom: 20px;
 }
 
 table.redTable {
-    border: 2px solid #A40808;
-    background-color: #EEE7DB;
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
+  border: 2px solid #A40808;
+  background-color: #EEE7DB;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.redTable td, table.redTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.redTable tbody td {
+  font-size: 13px;
+}
+table.redTable tr:nth-child(even) {
+  background: #F5C8BF;
+}
+table.redTable thead {
+  background: #A40808;
+}
+table.redTable thead th {
+  font-size: 19px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #A40808;
+}
+table.redTable thead th:first-child {
+  border-left: none;
+}
+
+table.redTable tfoot {
+  font-size: 13px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #A40808;
+}
+table.redTable tfoot td {
+  font-size: 13px;
+}
+table.redTable tfoot .links {
+  text-align: right;
+}
+table.redTable tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #A40808;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.menu{
+  margin-top: 100px;
+}
+#closed{
+    display: none !important;
   }
-  table.redTable td, table.redTable th {
-    border: 1px solid #AAAAAA;
-    padding: 3px 2px;
+  #open{
+    display: flex ;
+    
   }
-  table.redTable tbody td {
-    font-size: 13px;
+  .form-Edit-Pc{
+    height: 300px;
   }
-  table.redTable tr:nth-child(even) {
-    background: #F5C8BF;
+  .form-Edit-Phone{
+    height: 500px;
   }
-  table.redTable thead {
-    background: #A40808;
+  .none{
+    display: block !important;
+   
   }
-  table.redTable thead th {
-    font-size: 19px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-align: center;
-    border-left: 2px solid #A40808;
+  .block{
+    display: flex !important;
   }
-  table.redTable thead th:first-child {
-    border-left: none;
+
+  .visible_add_no{
+    display: none  ;
   }
-  
-  table.redTable tfoot {
-    font-size: 13px;
-    font-weight: bold;
-    color: #FFFFFF;
-    background: #A40808;
+  .visible_add_yes{
+    display: flex;
   }
-  table.redTable tfoot td {
-    font-size: 13px;
-  }
-  table.redTable tfoot .links {
-    text-align: right;
-  }
-  table.redTable tfoot .links a{
-    display: inline-block;
-    background: #FFFFFF;
-    color: #A40808;
-    padding: 2px 8px;
-    border-radius: 5px;
+
+  .menu_content-add{
+    display: flex;
+    justify-content: end;
   }

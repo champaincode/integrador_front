@@ -9,10 +9,6 @@ const Home = () => {
 const user = useSelector((state)=>state.user)
 
 
-useEffect(() => {
-if(user.id)console.log("ESTO ES ESPAAARTAAA!!",user)
-
-}, [user])
 
 
   return (

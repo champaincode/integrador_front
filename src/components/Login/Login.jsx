@@ -27,7 +27,6 @@ const Login = () => {
     axios
       .post("http://localhost:5000/api/users/login", data)
       .then((res) => {
-        console.log("ESTO ES RES", res)
         dispatch(setUser(res.data))
          localStorage.setItem('user', JSON.stringify(res.data));
         navigate("/")
@@ -84,7 +83,7 @@ const Login = () => {
             fullWidth
           />
           {errors.password && <span>*Password Require*</span>}
-          <hr />
+          <br />
         </Grid>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Button

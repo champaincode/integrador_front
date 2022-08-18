@@ -1,0 +1,20 @@
+.menu_pc{
+   
+    height: 60vh;
+    }
+    
+    .menu_phone{
+    display: flex;
+    flex-direction: column-reverse;
+    }
+    
+    .imagen_phone{
+      width: 100vw !important;
+    
+    }
+    
+    .text_phone{
+        width: 100vw !important;
+        height: 100vh ;
+        text-align: center;
+      }
