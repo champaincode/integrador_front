@@ -137,9 +137,7 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-            
-             
-              {pages.map((page) => (
+            {pages.map((page) => (
                 <MenuItem key={page.buttonName} onClick={handleCloseNavMenu}>
                   <Link to={page.routes} style={{ textDecoration: "none" }}>
                     <Typography

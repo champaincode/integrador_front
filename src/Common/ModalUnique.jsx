@@ -1,34 +1,40 @@
-import React from 'react'
-import {Modal, Box, Typography, Grid, Button, Paper } from "@mui/material"
+import React from "react";
+import { Modal, Box, Typography, Grid, Button, Paper } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { experimentalStyled as styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 500,
-    height: 550,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
-
-const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) => {
-  return ( <>
-    {drinkDetail !== undefined && (
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  height: 550,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+const ModalUnique = ({
+  product,
+  open,
+  handleClose,
+  HandleFavorite,
+  changecolor,
+}) => {
+  return (
+    <>
+      {product && (
         <Modal
           open={open}
           onClose={handleClose}
@@ -63,7 +69,7 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
                     component="h2"
                     sx={{ fontFamily: "lobster", marginTop: "20px" }}
                   >
-                    {drinkDetail.tittle}
+                    {product.tittle}
                   </Typography>
 
                   <Typography
@@ -73,7 +79,7 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
                     sx={{ fontFamily: "Roboto", marginTop: "20px" }}
                   >
                     {" "}
-                    {drinkDetail.description}
+                    {product.description}
                   </Typography>
                   <Typography
                     id="modal-modal-title"
@@ -81,7 +87,7 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
                     component="p"
                     sx={{ fontFamily: "Roboto", marginTop: "20px" }}
                   >
-                    Stock:{drinkDetail.stock}
+                    Stock:{product.stock}
                   </Typography>
                   <Typography
                     id="modal-modal-title"
@@ -90,7 +96,7 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
                     sx={{ fontFamily: "Roboto", marginTop: "20px" }}
                   >
                     {" "}
-                    Price:${drinkDetail.price}
+                    Price:${product.price}
                   </Typography>
                   <Box sx={{ display: "flex" }}>
                     {" "}
@@ -122,7 +128,7 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
                     padding: { xs: 2, md: 2 },
                   }}
                 >
-                  <img className="img_adptable" src={drinkDetail.image} />
+                  <img className="img_adptable" src={product.image} />
                 </Item>
               </Grid>
             </Grid>
@@ -133,8 +139,8 @@ const Modaldrink = ({drinkDetail,open,handleClose,HandleFavorite, changecolor}) 
           </Box>
         </Modal>
       )}
-      </>
-  )
-}
+    </>
+  );
+};
 
-export default Modaldrink
+export default ModalUnique;

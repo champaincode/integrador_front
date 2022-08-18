@@ -23,7 +23,7 @@ const Featured = () => {
 <Container  sx={{marginTop:"100px"}}>
 <Container>
 <Divider variant='middle' />
- <Typography sx={{padding:"20px",fontFamily:"Lobster",fontSize:"25px",color:"white", textAlign:"center"}}>Featured</Typography>
+ <Typography  sx={{padding:"20px",fontFamily:"Lobster",fontSize:"25px",color:"white", textAlign:"center"}}>Featured</Typography>
 <Divider variant='middle'/>
 
 </Container>
