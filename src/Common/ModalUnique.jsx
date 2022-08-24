@@ -1,8 +1,14 @@
-import React from "react";
+import {useState}from "react";
+import "./indexCommon.css"
 import { Modal, Box, Typography, Grid, Button, Paper } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { experimentalStyled as styled } from "@mui/material/styles";
+import { useSelector , useDispatch} from "react-redux";
+import axios from "axios";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { addToCart } from "../store/cart";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -28,16 +34,68 @@ const style = {
 const ModalUnique = ({
   product,
   open,
+  setOpen,
+
   handleClose,
   HandleFavorite,
   changecolor,
 }) => {
+
+  const user = useSelector((state) => state.user);
+  const [count, setCount] = useState(1);
+  const [stateButton, SetStateButton] = useState(false)
+  const dispatch = useDispatch()
+
+  const IncNum = () => {
+   const newCount = count + 1
+  
+    if(newCount === product.stock) {
+      SetStateButton(true)
+
+   }
+   setCount(count + 1);
+ };
+
+ const   handleClosedos = () => {
+  setOpen(false)
+  setCount(1);
+  SetStateButton(false)
+ }
+ 
+  const DecNum = () => {
+    const newCount = count +1
+    if (count > 0) {setCount(count - 1)}
+    if(count > 1 || newCount === product.stock){
+      SetStateButton(false)}
+    else {
+      setCount(1);
+    
+    }
+  };
+  
+ 
+  const handleBuy = (product) => {
+    const item = {
+      userId: user.id,
+      price: product.price,
+      quantity: count,
+      productoId: product.id,
+      tittle: product.tittle,
+      image: product.image,
+    }
+
+    dispatch(addToCart(item))
+      console.log( "COMPRASTE GUACHIN")
+      setCount(1);
+      SetStateButton(false)
+  };
+
   return (
     <>
       {product && (
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={handleClosedos}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
@@ -48,7 +106,7 @@ const ModalUnique = ({
               component="h2"
               sx={{ fontFamily: "lobster", marginTop: "50px" }}
             >
-              Cofeels
+              Coffeels
             </Typography>
             <Grid
               container
@@ -89,6 +147,7 @@ const ModalUnique = ({
                   >
                     Stock:{product.stock}
                   </Typography>
+                  
                   <Typography
                     id="modal-modal-title"
                     variant="p"
@@ -98,9 +157,42 @@ const ModalUnique = ({
                     {" "}
                     Price:${product.price}
                   </Typography>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="p"
+                    component="p"
+                    sx={{ fontFamily: "Roboto", marginTop: "20px" }}
+                  >
+                    Quantity: <Button
+                     
+                   onClick={DecNum}
+                   variant="contained"
+                   color="success"
+                   sx={{ height:"20px",minWidth:"13px",padding:"7px 0px",marginRight:"5px" }}
+                 >
+               <RemoveIcon />
+                 </Button>   
+                 
+                 {count}
+              
+                 <Button
+                   onClick={IncNum}
+                    disabled={stateButton}
+                      variant="contained"
+                      color="success"
+                    className="buttonAdd"
+                 sx={{ height:"20px",padding:"7px 0px", minWidth:"13px",marginLeft:"5px"}}
+                   
+                    >
+                    
+                    <AddIcon />
+                    </Button> 
+                  </Typography>
                   <Box sx={{ display: "flex" }}>
                     {" "}
                     <Button
+                      setCount={setCount}
+                      onClick={() => handleBuy(product)}
                       variant="contained"
                       color="success"
                       sx={{ fontFamily: "Roboto", marginTop: "50px" }}
@@ -113,7 +205,7 @@ const ModalUnique = ({
                         variant="contained"
                         sx={{ fontFamily: "Roboto", marginTop: "50px" }}
                       >
-                        <FavoriteIcon className={changecolor} />{" "}
+                        {user.id && <FavoriteIcon className={changecolor} />}
                       </IconButton>
                     </Box>
                   </Box>

@@ -66,7 +66,7 @@ const Otherseccion = () => {
      
     </Container>
     
-    <Box    onClick={handleNavigateMenu}   className={other?"imagen_pc":"imagen_phone"} 
+    <Box  onClick={handleNavigateMenu}   className={other?"imagen_pc":"imagen_phone"} 
         sx={{
           height: "70vh",
           width: "50vw",

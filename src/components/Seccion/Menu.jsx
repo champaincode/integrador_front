@@ -25,7 +25,7 @@ import ProductsCircles from "../../Common/ProductsCircles";
 const Menu = () => {
   const [open, setOpen] = useState(false);
   const [changecolor, setChangecolor] = useState("change");
-  const handleClose = () => setOpen(false);
+
   const handleFavoriteReset = () => setChangecolor("change");
   const drinkDetail = useSelector((state) => state.setDrinkId);
   const foodDetail = useSelector((state) => state.setFoodsId);
@@ -33,6 +33,12 @@ const Menu = () => {
   const foodsProduct = useSelector((state) => state.setFoods);
   const drinksProduct = useSelector((state) => state.setDrinks);
   const dispatch = useDispatch();
+
+  const handleClose = () => {
+    setOpen(false);
+  
+  }
+
 
   useEffect(() => {
     dispatch(setDrinks());
@@ -65,6 +71,7 @@ const handleOpen = (id) => {
       <ModalUnique
         product={foodDetail ? foodDetail : drinkDetail}
         open={open}
+        setOpen={setOpen}
         handleClose={handleClose}
         HandleFavorite={HandleFavorite}
         changecolor={changecolor}

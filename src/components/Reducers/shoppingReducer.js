@@ -1,7 +1,7 @@
 import { TYPES } from "../actions/shoppingAction";
 import { useSelector } from "react-redux";
 
-import {setAllProducts} from "../../store/allproducts"
+
 
 
 export const shoppinginitialState = {

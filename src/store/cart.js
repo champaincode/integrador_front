@@ -3,38 +3,77 @@ import axios from "axios";
 
 export const addToCart = createAsyncThunk(
   "ADD_CART",
-  async ({product,quantity}) => {
-    return axios.post("http://localhost:5000/api/users/add", {product,quantity})
-    .then((res)=>{
-      return res.data
-    })
-     
-  }
-  );
-
-export const deleteFromCart = createAsyncThunk(
-  "DELETE_FROM_CART",
-  async ({productToShow}) => {
-    return axios.post("http://localhost:5000/api/users/remove",{product:productToShow} )
-     .then((res)=>{
-      return res.data 
-     })
+  async (
+    
+     item
+    
+  ) => {
+    return axios
+      .post(`http://localhost:5000/api/cart` , item)
+      .then((res) => {
+      return res.data;
+      });
   }
 );
 
-const cartReducer = createReducer(JSON.parse(localStorage.getItem('Cart')) || [], {
-  [addToCart.fulfilled]: (state, action) => {
-    const newState = [...state, action.payload]
-    localStorage.setItem('Cart', newState)
-    console.log(action, "ACAAA ACTION PP")
-    return newState
-  },
-  [deleteFromCart.fulfilled]: (state, action) => {
-    const newState = state.filter(element => element.product.id !== action.payload.id);
-    localStorage.setItem('Cart', JSON.stringify(newState))
-    return newState
-
+export const deleteFromCart = createAsyncThunk(
+  "DELETE_FROM_CART",
+  async (id) => {
+    return axios
+      .delete(`http://localhost:5000/api/cart/${id}`)
+      .then((res) => {
+        return res.data;
+      });
   }
+);
+export const getFromCart = createAsyncThunk("GET_FROM_CART", async (userId) => {
+  const data = await axios.get(`http://localhost:5000/api/cart/${userId}`)
+    console.log(data, "ACA ESTA LA DAAAAAAAAAAAATAAAAA") 
+  ;
 });
 
+
+
+
+const cartReducer = createReducer(
+  localStorage.getItem("Cart") || [],
+  {
+    [addToCart.fulfilled]: (state, action) => {
+     const newState = [action.payload];
+     localStorage.setItem("Cart", newState);
+        return newState;
+    },
+    [getFromCart.fulfilled]: (state, action) => action.payload,
+
+    [deleteFromCart.fulfilled]: (state, action) => {
+      const newState = state.filter(
+        (element) => element.product.id !== action.payload.id
+      );
+      localStorage.setItem("Cart", JSON.stringify(newState));
+      return newState;
+    },
+    
+  }
+);
+
 export default cartReducer;
+
+
+
+// const cartReducer = createReducer(
+//   localStorage.getItem("Cart") || [],
+//   {
+//     [addToCart.fulfilled]: (state, action) => {
+//       const newState = [...state, action.payload];
+//       localStorage.setItem("Cart", newState);
+//       return newState;
+//     },
+//     [deleteFromCart.fulfilled]: (state, action) => {
+//       const newState = state.filter(
+//         (element) => element.product.id !== action.payload.id
+//       );
+//       localStorage.setItem("Cart", JSON.stringify(newState));
+//       return newState;
+//     },
+//   }
+// );

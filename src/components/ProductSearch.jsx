@@ -32,6 +32,7 @@ const ProductSearch = ({ HandleFavorite, changecolor }) => {
     <><ModalUnique
         product={foodDetail ? foodDetail : drinkDetail}
         open={open}
+        setOpen={setOpen}
         handleClose={handleClose}
         HandleFavorite={HandleFavorite}
         changecolor={changecolor}

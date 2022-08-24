@@ -3,7 +3,7 @@ import { TYPES } from "../../actions/shoppingAction";
 import { shoppinginitialState, shoppingReducer } from "../../Reducers/shoppingReducer";
 
 const CardItem = ({data,addToCart,delFromCart }) => {
-    let {id,name,price,quantity} = data
+    // let {id,tittle,price,quantity} = data
 
 // const [state, dispatch] = useReducer(shoppingReducer,shoppinginitialState)
 // const {products,cart} = state
@@ -13,10 +13,11 @@ const CardItem = ({data,addToCart,delFromCart }) => {
 // }
    return (
     <div style={{borderBottom:"thin solid gray"}}>
-        <h4>{name}</h4><button onClick={() => addToCart(id)}>Agregar uno</button>        <button onClick={() => delFromCart(id)}>Eliminar uno</button>
-        <h5>${price*quantity} x{quantity}</h5>
+        {/* <h4>{tittle}</h4>
+        <button onClick={() => addToCart(id)}>Agregar uno</button>        <button onClick={() => delFromCart(id)}>Eliminar uno</button> */}
+        <h5>${data.price*data.quantity} x{data.quantity}</h5>
 
-        <button onClick={() => delFromCart(id,true)}>Eliminar todos</button>
+        {/* <button onClick={() => delFromCart(id,true)}>Eliminar todos</button> */}
     </div>
   )
 }

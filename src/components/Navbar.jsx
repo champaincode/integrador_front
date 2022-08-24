@@ -1,87 +1,42 @@
-import React, { useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+import React, { useEffect, useState } from "react";
+import { AppBar, Box,Typography,Toolbar,Menu,Container,Button,MenuItem } from "@mui/material";
 import LogoCoffeels from "../Utils/LogoCoffeels";
 import { Link } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Shopcar from "../Utils/Shopcar";
 import Search from "./Search";
-import StarIcon from "@mui/icons-material/Star";
-import RoomIcon from "@mui/icons-material/Room";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../store/user";
 import { setPersistencia } from "../store/user";
 import { useSelector } from "react-redux";
-import { Divider } from "@mui/material";
-import axios from "axios";
+import Pages from "../Common/Pages";
+import OtherPages from "../Common/OtherPages";
+import DropdownUsers from "../Common/DropdownUsers";
+
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const matches = useMediaQuery("(max-width:900px)");
   const user = useSelector((state) => state.user);
+  const open = Boolean(anchorEl);
   const dispatch = useDispatch();
 
-  const pages = [
-    {
-      buttonName: "Menu",
-      routes: "/menu",
-      icons: <MenuBookIcon sx={{ ml: "2px" }} />,
-    },
-    { 
-      buttonName: "Featured",
-      routes: "/featured",
-      icons: <StarIcon sx={{ color: "yellow", ml: "2px" }} />,
-    },
-    {
-      buttonName: "Location",
-      routes: "/location",
-      icons: <RoomIcon sx={{ ml: "2px" }} />,
-    },
-   ]
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   useEffect(() => {
     dispatch(setPersistencia());
   }, []);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const handleClick = (e) => setAnchorEl(e.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const handleOpenNavMenu = (e) => setAnchorElNav(e.currentTarget);
+  const handleOpenUserMenu = (e) => setAnchorElUser(e.currentTarget);
+  const handleCloseNavMenu = () => setAnchorElNav(null);
+  const handleCloseUserMenu = () =>  setAnchorElUser(null);
+  
   const logout = () => {
-    axios.post("http://localhost:5000/api/users/logout", {}).then((res) => {
-      dispatch(setLogout(res.data));
-    });
-    localStorage.removeItem("user");
+  dispatch(setLogout());
+  localStorage.removeItem("user");
   };
 
   return (
@@ -107,7 +62,7 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
             >
-              Coffeels   
+              Coffeels
             </Typography>
           </Link>
 
@@ -137,40 +92,13 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-            {pages.map((page) => (
-                <MenuItem key={page.buttonName} onClick={handleCloseNavMenu}>
-                  <Link to={page.routes} style={{ textDecoration: "none" }}>
-                    <Typography
-                      sx={{ color: "black", fontFamily: "Roboto" }}
-                      textAlign="center"
-                    >
-                      {page.buttonName} 
-                    </Typography>
-                  </Link>
-                </MenuItem>
-                
-              ))}
-              {user.id && user.isAdmin && <Link to="/favorites" style={{ textDecoration: "none" }}>
-            <Button
-                  key="favorites"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 1.6, color: "white", display: "block" }}
-                >
-            favorites <FavoriteIcon sx={{ color: "red", ml: "2px" }} />
-                </Button>
-              </Link>}
-            {user.id && <Link to="/bookings" style={{ textDecoration: "none" }}>
-            <Button
-                  key="bookings"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 1.6, color: "white", display: "block" }}
-                >
-             bookings<CalendarTodayIcon sx={{ ml: "2px" }} />
-                </Button>
-              </Link>}
+              <Pages handleOpenNavMenu={handleOpenNavMenu} />
+              {user.id && (
+                <OtherPages handleCloseNavMenu={handleCloseNavMenu} />
+              )}
             </Menu>
           </Box>
-          <Link to="/" style={{ textDecoration: "none",color:"white" }}>
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
             <Typography
               variant="h5"
               noWrap
@@ -187,146 +115,31 @@ const Navbar = () => {
                 textDecoration: "none",
               }}
             >
-              Coffeels 
+              Coffeels
             </Typography>
-            
           </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            
-           
-  
-            {pages.map((page) => (
-              <Link to={page.routes} style={{ textDecoration: "none" }}>
-                <Button
-                  key={page.buttonName}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 1.6, color: "white", display: "block" }}
-                >
-                  {page.buttonName}
-                  {page.icons}
-                </Button>
-              </Link>
-            ))}
-                  {user.id && <Link to="/favorites" style={{ textDecoration: "none" }}>
-            <Button
-                  key="favorites"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 1.6, color: "white", display: "block" }}
-                >
-            favorites <FavoriteIcon sx={{ color: "red", ml: "2px" }} />
-                </Button>
-              </Link>}
-            {user.id && <Link to="/bookings" style={{ textDecoration: "none" }}>
-            <Button
-                  key="bookings"
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 1.6, color: "white", display: "block" }}
-                >
-             bookings<CalendarTodayIcon sx={{ ml: "2px" }} />
-                </Button>
-              </Link>}
-            {user.isAdmin && <Button
-            id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            sx={{color:"#03fc35"}}
-            >Admin</Button> }  
-               <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-       <Link to="/admin/users" className="link-admin-menu"><MenuItem onClick={handleClose}>Users</MenuItem></Link> 
-       <Link to="/admin/products"className="link-admin-menu"><MenuItem onClick={handleClose}>Products</MenuItem></Link> 
-      </Menu>
+            <Pages handleOpenNavMenu={handleOpenNavMenu} />
+            {user.id && <OtherPages handleCloseNavMenu={handleCloseNavMenu} handleClose={handleClose} handleClick={handleClick} anchorEl={anchorEl} open={open}/>}
+      
           </Box>
-          
-          <Box>
+
+          <Box display={"flex"}>
+         
             <Link to="/shop">
+           
               <Shopcar />
             </Link>
+            <Search />
+    
           </Box>
-          <Search />
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGv0ZIrLidHrXmxdSY38qwW3_FyQZhJo-sFQ&usqp=CAU"
-                />
-              </IconButton>
-            </Tooltip>
-
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {!user.id ? (
-                <>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Link
-                      to="/login"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <Typography textAlign="center">Login</Typography>
-                    </Link>
-                  </MenuItem>
-
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Link
-                      to="/register"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <Typography textAlign="center">Register</Typography>
-                    </Link>
-                  </MenuItem>
-                </>
-              ) : (
-                <>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Link
-                      to="/profile"
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <Typography textAlign="center">
-                        {user.firstname} {user.lastname}
-                      </Typography>
-                    </Link>
-                  </MenuItem>
-
-                  <MenuItem onClick={handleCloseUserMenu}>
-              </MenuItem>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Link
-                      to="/login"
-                      onClick={logout}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      <Typography textAlign="center">Logout</Typography>
-                    </Link>
-                  </MenuItem>
-                </>
-              )}
-            </Menu>
-          </Box>
+    {/* DROPDOWN LOGIN AND REGISTER */}
+            <DropdownUsers
+              handleOpenUserMenu={handleOpenUserMenu}
+              anchorElUser={anchorElUser}
+              handleCloseUserMenu={handleCloseUserMenu}
+              logout={logout}
+            />
         </Toolbar>
       </Container>
     </AppBar>

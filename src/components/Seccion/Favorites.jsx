@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { experimentalStyled as styled } from '@mui/material/styles';
-
+import SeccionProduct from '../../Common/SeccionProduct';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -27,6 +27,8 @@ const Favorites = () => {
 <Divider variant='middle'/>
 
 </Container>
+   
+
 <Box sx={{marginTop:"10px", }}>
 <Container  maxWidth="lg"  >
 <Grid container   spacing={{ xs: 8, md: 5 }} columns={{ xs: 4, sm: 8, md: 12 }}>

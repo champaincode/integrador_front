@@ -48,7 +48,7 @@ export default function Search() {
     <div>
     <div> <IconButton onClick={handleOpen} >
    
-    <SearchIcon sx={{fontSize:35,color:"#352620"}}/>
+    <SearchIcon sx={{fontSize:"30px",color:"#352620"}}/>
  
  </IconButton>
       

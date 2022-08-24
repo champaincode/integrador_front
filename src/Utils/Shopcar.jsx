@@ -17,7 +17,7 @@ export default function CustomizedBadges() {
   return (
     <IconButton aria-label="cart">
       <StyledBadge badgeContent={0} color="secondary">
-        <ShoppingCartIcon  sx={{height:50, fontSize:37}} />
+        <ShoppingCartIcon  sx={{fontSize:"30px"}} />
       </StyledBadge>
     </IconButton>
   );
