@@ -75,7 +75,14 @@ const handleOpen = (id) => {
         <SeccionProduct text={"Foods"} />
         <ProductsCircles circle={foodsProduct} handleOpen={handleOpen} />
  
-    
+      <ModalUnique
+        product={foodDetail ? foodDetail : drinkDetail}
+        open={open}
+        setOpen={setOpen}
+        handleClose={handleClose}
+        HandleFavorite={HandleFavorite}
+        changecolor={changecolor}
+      />
         </Container>
 
   );
