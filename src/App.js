@@ -8,13 +8,15 @@ import Login from './components/Login/Login';
 import Register from "./components/Login/Register"
 import Profile from './components/Login/Profile'
 import MenuAdmin from './components/Login/AdminDashboard/pages/homeAdmin/MenuAdmin'
-import Featured from './components/Seccion/Featured'
+import Aboutus from './components/Seccion/Aboutus'
 import Location from './components/Seccion/Location'
 import Favorites from './components/Seccion/Favorites'
 import Bookings from './components/Seccion/Bookings'
 import Shop from "./components/Seccion/Shop/Shop"
 import ProductSearch from "./components/ProductSearch"
 import ProductAdmin from './components/Login/AdminDashboard/pages/homeAdmin/ProductAdmin';
+
+
 function App() {
   const user = useSelector((state)=>state.user)
   return (
@@ -22,11 +24,13 @@ function App() {
     <Navbar/>
  
      <Routes>  
+     <Route path="/menu" element={<Menu />} />  
+
+      
       {user.id &&  <Route path="/profile" element={<Profile />} /> }
       <Route path="/" element={<Home/>} />
-      <Route path="/menu" element={<Menu />} />  
  
-      <Route path="/featured" element={<Featured />} />  
+      <Route path="/About-us" element={<Aboutus/>} />  
       <Route path="/location" element={<Location />} />
       <Route path="/favorites" element={<Favorites />} /> 
       <Route path="/bookings" element={<Bookings  />} />     

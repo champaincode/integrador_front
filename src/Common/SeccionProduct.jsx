@@ -8,7 +8,7 @@ const SeccionProduct = ({text}) => {
       sx={{
         padding: "20px",
         fontFamily: "Lobster",
-        fontSize: "25px",
+        fontSize: "45px",
         color: "white",
         textAlign: "center",
       }}

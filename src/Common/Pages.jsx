@@ -4,7 +4,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { Link } from 'react-router-dom';
 import { Button, MenuItem,Typography} from '@mui/material';
-
+import GroupIcon from '@mui/icons-material/Group';
 
 const Pages = ({handleCloseNavMenu}) => {
     const pages = [
@@ -14,9 +14,9 @@ const Pages = ({handleCloseNavMenu}) => {
           icons: <MenuBookIcon sx={{ ml: "2px",fontSize:"22px",color:"white"}} />,
         },
         {
-          buttonName: "Featured",
-          routes: "/featured",
-          icons: <StarIcon sx={{ color: "yellow", ml: "2px",fontSize:"22px" }} />,
+          buttonName: "About us",
+          routes: "/About-us",
+          icons: <GroupIcon sx={{ color: "white", ml: "2px",fontSize:"22px" }} />,
         },
         {
           buttonName: "Location",
@@ -26,8 +26,9 @@ const Pages = ({handleCloseNavMenu}) => {
       ];
   return (<>
     {pages.map((page) => (
+        <Link to={page.routes} style={{ textDecoration: "none", display:"flex" }}>
        <MenuItem key={page.buttonName} onClick={handleCloseNavMenu}>
-       <Link to={page.routes} style={{ textDecoration: "none", display:"flex" }}>
+     
          <Typography
            sx={{ color: "white", fontFamily: "Roboto"}}
         
@@ -39,8 +40,9 @@ const Pages = ({handleCloseNavMenu}) => {
            sx={{ color: "black", fontFamily: "Roboto"}}
         
          >{page.icons}      </Typography>
-       </Link>
+    
      </MenuItem>
+     </Link>
       ))}
  </> )
 }

@@ -5,6 +5,7 @@ import Menu from './Menu'
 import Footer from './Footer'
 import { useSelector } from 'react-redux'
 
+
 const Home = () => {
 const user = useSelector((state)=>state.user)
 
@@ -16,8 +17,9 @@ const user = useSelector((state)=>state.user)
 
   <Carrousel/>
 
-  <Featured/>
   <Menu />
+  <Featured/>
+
   <Footer/>
 
   </>

@@ -34,7 +34,7 @@ function App() {
   }
   return (
    
-      <div style={{ textAlign: "center" ,marginTop:"80px",  }}>
+      <div style={{ textAlign: "center" ,  }}>
       
         
         <div style={{

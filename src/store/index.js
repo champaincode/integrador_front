@@ -11,7 +11,9 @@ import cartReducer from './cart'
 import getFromCartReducer from './getCart'
 
 const store =configureStore({
-  middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware:(getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false
+  }).concat(logger),
   reducer: {
     user:userReducer,
     setFoods:setFoodsReducer,

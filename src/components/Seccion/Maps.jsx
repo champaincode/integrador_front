@@ -1,6 +1,8 @@
 import React from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+
 import { Marker } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { InfoWindow } from '@react-google-maps/api';
 
 const containerStyle = {
   width: "100%",
@@ -8,28 +10,28 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -34.6849583,
-  lng: -58.5606109,
+  lat: -38.7152088,
+  lng: -62.2605273,
 };
 
 const Maps = () => {
-  return (
-    // <GoogleMap
-    //   mapContainerStyle={containerStyle}
-    //   center={center}
-    //   zoom={10}
-    //   googleMapsApiKey="AIzaSyBoHIGhu8OkaC7Emec78CdRQb2WbdmcD48"
-    // >
-    //   <Marker
-    //     position={{
-    //       LatLng: -34.6849583,
-    //       LatLngLiteral: -58.5606109,
-    //     }}
-    //     title={"Stack"}
-    //   />
-    //   <> </>
-    // </GoogleMap>
-       <> </>
-  );
-};
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBoHIGhu8OkaC7Emec78CdRQb2WbdmcD48"
+  })
+
+  return isLoaded ? (
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={17}
+    >
+        <Marker position={{  lat: -38.7152088,
+  lng: -62.2605273,}} title={"Café martinez"}  draggable={true} MarkerOptions/>
+  
+
+   
+      </GoogleMap>
+  ) : <></>
+}
 export default Maps;

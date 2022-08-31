@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="footer-content-container">
                 <span className="menu-title">menu</span>
                 <a href="/" class="menu-item-footer">Home</a>
-                <a href="/login" class="menu-item-footer">Login</a>
+                <a href="/menu" class="menu-item-footer">menu</a>
                 <a href="/register" class="menu-item-footer">Register</a>
             </div>
             <div className="footer-content-container">

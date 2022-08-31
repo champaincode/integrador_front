@@ -67,22 +67,17 @@ const handleOpen = (id) => {
   };
 
   return (
-    <>
-      <ModalUnique
-        product={foodDetail ? foodDetail : drinkDetail}
-        open={open}
-        setOpen={setOpen}
-        handleClose={handleClose}
-        HandleFavorite={HandleFavorite}
-        changecolor={changecolor}
-      />
-      <Container sx={{ marginTop: "100px" }}>
-        <SeccionProduct text={"Drinks"} />
+   
+       <Container  sx={{ marginTop: "10px" }}>
+
+        <SeccionProduct id={"/menu"} text={"Drinks"} />
         <ProductsCircles circle={drinksProduct} handleOpen={handleOpen} />
         <SeccionProduct text={"Foods"} />
         <ProductsCircles circle={foodsProduct} handleOpen={handleOpen} />
-      </Container>
-    </>
+ 
+    
+        </Container>
+
   );
 };
 export default Menu;

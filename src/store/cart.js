@@ -3,11 +3,7 @@ import axios from "axios";
 
 export const addToCart = createAsyncThunk(
   "ADD_CART",
-  async (
-    
-     item
-    
-  ) => {
+  async (item) => {
     return axios
       .post(`http://localhost:5000/api/cart` , item)
       .then((res) => {
@@ -27,20 +23,17 @@ export const deleteFromCart = createAsyncThunk(
   }
 );
 export const getFromCart = createAsyncThunk("GET_FROM_CART", async (userId) => {
+  console.log("EL USER ID PUTAMADRE", userId)
   const data = await axios.get(`http://localhost:5000/api/cart/${userId}`)
-    console.log(data, "ACA ESTA LA DAAAAAAAAAAAATAAAAA") 
+    return data.data
   ;
 });
-
-
-
-
 const cartReducer = createReducer(
-  localStorage.getItem("Cart") || [],
+ [],
   {
     [addToCart.fulfilled]: (state, action) => {
      const newState = [action.payload];
-     localStorage.setItem("Cart", newState);
+     localStorage.setItem("Cart", JSON.stringify(newState));
         return newState;
     },
     [getFromCart.fulfilled]: (state, action) => action.payload,
